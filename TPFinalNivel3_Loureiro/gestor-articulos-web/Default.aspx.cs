@@ -16,6 +16,11 @@ namespace gestor_articulos_web
         {
             ArticulosDatos datos = new ArticulosDatos();
             ListaArticulos = datos.listarconSP();
+            if (!IsPostBack)
+            {
+                repRepetidor.DataSource = ListaArticulos;
+                repRepetidor.DataBind();
+            }
 
         }
     }

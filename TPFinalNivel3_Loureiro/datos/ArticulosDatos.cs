@@ -17,7 +17,7 @@ namespace datos
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
 
-
+            
             try
             {
                 conexion.ConnectionString = "server=DESKTOP-3NONF6A\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security= true";
