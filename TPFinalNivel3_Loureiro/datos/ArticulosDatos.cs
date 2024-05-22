@@ -10,7 +10,7 @@ namespace datos
 {
     public class ArticulosDatos
     {
-        public List <Articulo> listar()
+        public List <Articulo> listar(string id = "")
         {
             List<Articulo> lista = new List<Articulo>();
             SqlConnection conexion = new SqlConnection();
@@ -23,6 +23,8 @@ namespace datos
                 conexion.ConnectionString = "server=DESKTOP-3NONF6A\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security= true";
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria, A.ImagenUrl, A.Precio FROM ARTICULOS A, CATEGORIAS C, MARCAS M WHERE A.IdMarca = M.Id AND A.IdCategoria = C.Id";
+                if (id != "")
+                    comando.CommandText += " and A.Id = " + id;
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -66,9 +68,7 @@ namespace datos
                 List<Articulo> lista = new List<Articulo>();
                 AccesoDatos datos = new AccesoDatos();
                 try
-                {
-                    //string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria, A.ImagenUrl, A.Precio FROM ARTICULOS A, CATEGORIAS C, MARCAS M WHERE A.IdMarca = M.Id AND A.IdCategoria = C.Id ";
-                    //datos.setearConsulta(consulta);
+                {                                  
                     datos.setearProcedimiento("storedListar");
                     datos.ejecutarConsulta();
                     while (datos.Lector.Read())
@@ -102,13 +102,12 @@ namespace datos
             }
     
 
-
-        public void agregar(Articulo nuevo)
+        public void agregarconSP(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @ImagenUrl, @Precio)");
+                datos.setearProcedimiento("storedAltaArticulo");
                 datos.setearParametro("@Codigo", nuevo.Codigo);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
@@ -129,12 +128,13 @@ namespace datos
             }
         }
 
-        public void modificar(Articulo articulo)
+       
+        public void modificarconSP(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE ARTICULOS SET Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, ImagenUrl = @imagenUrl, IdMarca = @IdMarca, IdCategoria = @idCategoria, Precio = @Precio WHERE Id = @Id");
+                datos.setearProcedimiento("storedModificarArticulo");
                 datos.setearParametro("@Codigo", articulo.Codigo);
                 datos.setearParametro("@Nombre", articulo.Nombre);
                 datos.setearParametro("@Descripcion", articulo.Descripcion);
@@ -155,6 +155,7 @@ namespace datos
                 datos.cerrarConexion();
             }
         }
+
         public void borrar(int id)
         {
             try

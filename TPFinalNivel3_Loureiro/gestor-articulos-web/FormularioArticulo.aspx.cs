@@ -32,6 +32,23 @@ namespace gestor_articulos_web
                     ddlCategoria.DataValueField = "Id";
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
+                }
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id != "" && !IsPostBack) 
+                { 
+                    ArticulosDatos datos = new ArticulosDatos();
+                    Articulo seleccionado = (datos.listar(id))[0];
+
+                    Session.Add("articuloSeleccionado", seleccionado);                  
+                    txtId.Text = id;
+                    txtCodigo.Text = seleccionado.Codigo.ToString();
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    txtImagenUrl.Text = seleccionado.ImagenUrl;
+                    
+                    ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
+                    ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+                    txtImagenUrl_TextChanged(sender, e);
 
                 }
             }
@@ -60,7 +77,14 @@ namespace gestor_articulos_web
                 nuevo.Categoria = new Categorias();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
-                datos.agregar(nuevo);
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(txtId.Text);
+                    datos.modificarconSP(nuevo);
+                }
+                else
+                    datos.agregarconSP(nuevo);
+
                 Response.Redirect("ListaProductos.aspx", false);
 
             }
