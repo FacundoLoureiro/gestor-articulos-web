@@ -11,8 +11,10 @@ namespace gestor_articulos_web
 {
     public partial class FormularioUsuario : System.Web.UI.Page
     {
+        public bool ConfirmaEliminacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            ConfirmaEliminacion = false;
             txtId.Enabled = false;
             try
             {
@@ -99,6 +101,28 @@ namespace gestor_articulos_web
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtImagenUrl.Text;        
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmaEliminacion = true;
+        }
+
+        protected void btnConfirmarEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmarEliminacion.Checked)
+                {
+                    ArticulosDatos datos = new ArticulosDatos();
+                    datos.borrar(int.Parse(txtId.Text));
+                    Response.Redirect("ListaProductos.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+            }
         }
     }
 }
