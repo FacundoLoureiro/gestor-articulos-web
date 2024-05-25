@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using datos;
+using dominio;
 
 namespace gestor_articulos_web
 {
@@ -13,9 +14,9 @@ namespace gestor_articulos_web
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticulosDatos datos = new ArticulosDatos();   
-            dgvArticulos.DataSource = datos.listarconSP();
+            Session.Add("ListaProductos", datos.listarconSP());
+            dgvArticulos.DataSource = Session["ListaProductos"];
             dgvArticulos.DataBind();
-
         }
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -29,6 +30,14 @@ namespace gestor_articulos_web
         {
             string id = dgvArticulos.SelectedDataKey.Value.ToString();
             Response.Redirect("FormularioArticulo.aspx?id=" + id);
+        }
+
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["ListaProductos"];
+            List<Articulo> listaFiltro = lista.FindAll(x=> x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            dgvArticulos.DataSource = listaFiltro;
+            dgvArticulos.DataBind();
         }
     }
 }
