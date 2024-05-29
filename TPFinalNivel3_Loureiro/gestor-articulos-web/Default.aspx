@@ -4,8 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Productos</h1>
     
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-         
+    <div class="row row-cols-1 row-cols-md-3 g-4">         
         <asp:Repeater runat="server" ID="repRepetidor">
             <ItemTemplate>
                  <div class="col">
