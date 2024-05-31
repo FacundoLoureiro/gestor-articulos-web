@@ -26,7 +26,7 @@ namespace gestor_articulos_web
                 if (datos.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
-                    Response.Redirect("ListaProductos.aspx", false);
+                    Response.Redirect("MiPerfil.aspx", false);
                 }
                 else
                 {
