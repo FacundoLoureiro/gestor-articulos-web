@@ -46,7 +46,6 @@
     <Compile Include="CategoriaDatos.cs" />
     <Compile Include="MarcaDatos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistroDatos.cs" />
     <Compile Include="SeguridadDatos.cs" />
     <Compile Include="UsuarioDatos.cs" />
   </ItemGroup>

@@ -15,14 +15,16 @@ namespace datos
             try
             {
                 datos.setearConsulta("SELECT Id, email, pass, admin FROM USERS WHERE email = @email AND pass = @pass");
-                datos.setearParametro("@email", usuario.User);
+                datos.setearParametro("@email", usuario.Email);
                 datos.setearParametro("@pass", usuario.Pass);
 
                 datos.ejecutarConsulta();
                 while (datos.Lector.Read())
                 {
-                    usuario.Id = datos.Lector.GetInt32(datos.Lector.GetOrdinal("Id"));                   
-                    usuario.TipoUsuario = datos.Lector.GetBoolean(datos.Lector.GetOrdinal("admin")) ? TipoUsuario.ADMIN : TipoUsuario.USUARIO;
+                    usuario.Id = (int)datos.Lector["id"];
+                    usuario.Admin = (bool)datos.Lector["admin"];
+                    //usuario.Id = datos.Lector.GetInt32(datos.Lector.GetOrdinal("Id"));                   
+                    //usuario.Admin = datos.Lector.GetBoolean(datos.Lector.GetOrdinal("admin")) ? Admin.ADMIN : Admin.USUARIO;
                     return true;
                 }
                 return false;
@@ -36,5 +38,27 @@ namespace datos
                 datos.cerrarConexion();
             }
         }
+    
+    public int NuevoRegistro(Usuario nuevo)
+    {
+        AccesoDatos datos = new AccesoDatos();
+
+        try
+        {
+            datos.setearProcedimiento("NuevoRegistro");
+            datos.setearParametro("@email", nuevo.Email);
+            datos.setearParametro("@pass", nuevo.Pass);
+            return datos.ejecutarAccionScalar();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            datos.cerrarConexion();
+        }
+
     }
+   }
 }

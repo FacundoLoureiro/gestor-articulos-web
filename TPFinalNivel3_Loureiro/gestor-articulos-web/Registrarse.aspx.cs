@@ -20,8 +20,8 @@ namespace gestor_articulos_web
         {
             try
             {
-                Registros registro = new Registros();
-                RegistroDatos registroDatos = new RegistroDatos();
+                Usuario registro = new Usuario();
+                UsuarioDatos registroDatos = new UsuarioDatos();
                 registro.Email = txtEmaiRegistro.Text;
                 registro.Pass = txtPassRegistro.Text;
                 int id = registroDatos.NuevoRegistro(registro);

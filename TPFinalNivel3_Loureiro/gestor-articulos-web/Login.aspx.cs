@@ -18,11 +18,12 @@ namespace gestor_articulos_web
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            Usuario usuario;
+            Usuario usuario = new Usuario();
             UsuarioDatos datos = new UsuarioDatos();
             try
             {
-                usuario = new Usuario(txtEmail.Text, txtPassword.Text, false);
+                usuario.Email = txtEmail.Text;
+                usuario.Pass = txtPassword.Text;
                 if (datos.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
