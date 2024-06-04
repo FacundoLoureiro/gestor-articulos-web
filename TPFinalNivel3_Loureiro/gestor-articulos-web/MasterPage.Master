@@ -36,8 +36,15 @@
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <a class="btn btn-success me-2" href="Login.aspx">Login</a>
-                        <a class="btn btn-outline-primary" href="Registrarse.aspx">Registrarse</a>
+                        <% if(!datos.SeguridadDatos.SesionActiva(Session["usuario"])){ %>
+                            <a class="btn btn-success me-2" href="Login.aspx">Login</a>
+                            <a class="btn btn-outline-primary" href="Registrarse.aspx">Registrarse</a>
+                        <%
+                            }
+                            else{
+                        %>
+                            <asp:Button Text="Salir" ID="btnSalir" cssclass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" runat="server" />                                           
+                        <%} %>
                     </div>
                 </div>
             </div>

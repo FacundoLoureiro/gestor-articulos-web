@@ -60,5 +60,26 @@ namespace datos
         }
 
     }
+
+    public void ActualizarUsuario(Usuario user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE USERS SET ImagenPerfil = @imagen WHERE Id = @id");
+                datos.setearParametro("@imagen", user.UrlImagen);
+                datos.setearParametro("@id", user.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally 
+            {
+                datos.cerrarConexion();
+            }
+        }
    }
 }
