@@ -27,6 +27,7 @@ namespace gestor_articulos_web
                 if (datos.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario);
+                    System.Diagnostics.Debug.WriteLine("Inicio de sesión exitoso. Redirigiendo a MiPerfil.aspx...");
                     Response.Redirect("MiPerfil.aspx", false);
                 }
                 else

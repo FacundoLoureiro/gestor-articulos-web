@@ -27,6 +27,7 @@ namespace gestor_articulos_web
                 int id = registroDatos.NuevoRegistro(registro);
 
                 Response.Redirect("ListaProductos.aspx", false);
+
             }
             catch (Exception)
             {

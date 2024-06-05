@@ -14,10 +14,8 @@ namespace datos
             Usuario usuario = user != null ? (Usuario)user : null;
             if (usuario != null && usuario.Id != 0)
                 return true;
-            else
-            {
-                return false;
-            }
+            else           
+                return false;            
         }
         public static bool esAdmin(object user)
         {

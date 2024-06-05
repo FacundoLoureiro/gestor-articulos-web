@@ -21,12 +21,16 @@ namespace gestor_articulos_web
         {
             try
             {
+                UsuarioDatos datos = new UsuarioDatos();
                 string ruta = Server.MapPath("./Images/");
                 Usuario usuario = (Usuario)Session["usuario"];
                 txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Id + ".jpg");
 
                 usuario.UrlImagen = "perfil-" + usuario.Id + ".jpg";
+                datos.ActualizarUsuario(usuario);
 
+                Image img = (Image)Master.FindControl("imgAvatar");
+                img.ImageUrl = "~/Images/" + usuario.UrlImagen;
             }
             catch ( Exception ex)
             {
