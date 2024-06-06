@@ -26,8 +26,7 @@ namespace gestor_articulos_web
                 usuario.Pass = txtPassword.Text;
                 if (datos.Loguear(usuario))
                 {
-                    Session.Add("usuario", usuario);
-                    System.Diagnostics.Debug.WriteLine("Inicio de sesión exitoso. Redirigiendo a MiPerfil.aspx...");
+                    Session.Add("usuario", usuario);                   
                     Response.Redirect("MiPerfil.aspx", false);
                 }
                 else

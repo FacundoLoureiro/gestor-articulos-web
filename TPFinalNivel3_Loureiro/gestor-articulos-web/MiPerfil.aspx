@@ -18,11 +18,7 @@
                 <div class="mb-3">
                     <label for="txtApellido" class="form-label">Apellido</label>
                     <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" MaxLength="8" ClientIDMode="Static"></asp:TextBox>
-                </div>
-                <div class="mb-3">
-                    <label for="txtFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                    <asp:TextBox ID="txtFechaNacimiento" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                </div>
+                </div>               
             </div>
             <div class="col-md-6">
                 <div class="mb-3">

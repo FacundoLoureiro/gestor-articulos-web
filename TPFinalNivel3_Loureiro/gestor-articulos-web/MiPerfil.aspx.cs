@@ -13,16 +13,26 @@ namespace gestor_articulos_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (SeguridadDatos.SesionActiva(Session["usuario"]))
-            //   Response.Redirect("Login.aspx", false);
-            if (!IsPostBack)
+            
+            try
             {
-                Usuario usuario = (Usuario)Session["usuario"];
-                if (usuario != null && !string.IsNullOrEmpty(usuario.UrlImagen))
+              if (!IsPostBack)
                 {
+                  Usuario usuario = (Usuario)Session["usuario"];
+                  txtEmail.Text = usuario.Email;
+                  txtEmail.ReadOnly = true;
+                  txtNombre.Text = usuario.Nombre;
+                  txtApellido.Text = usuario.Apellido;
+                  if (usuario != null && !string.IsNullOrEmpty(usuario.UrlImagen))
                     imgNuevoPerfil.ImageUrl = "~/Images/" + usuario.UrlImagen;
                 }
             }
+            catch (Exception ex)
+            {
+
+              Session.Add("Error", ex.ToString());
+            }
+            
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -37,6 +47,10 @@ namespace gestor_articulos_web
                     txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Id + ".jpg");
                     usuario.UrlImagen = "perfil-" + usuario.Id + ".jpg";
                 }
+
+                usuario.Nombre = txtNombre.Text;
+                usuario.Apellido = txtApellido.Text;
+                
 
                 datos.ActualizarUsuario(usuario);
                 imgNuevoPerfil.ImageUrl = "~/Images/" + usuario.UrlImagen;
