@@ -17,10 +17,9 @@ namespace datos
                 datos.setearConsulta("SELECT Id, email, pass, admin, urlImagenPerfil FROM USERS WHERE email = @email AND pass = @pass");
                 datos.setearParametro("@email", usuario.Email);
                 datos.setearParametro("@pass", usuario.Pass);
-                
-
                 datos.ejecutarConsulta();
-                while (datos.Lector.Read())
+
+                if(datos.Lector.Read())
                 {
                     usuario.Id = (int)datos.Lector["id"];
                     usuario.Admin = (bool)datos.Lector["admin"];
