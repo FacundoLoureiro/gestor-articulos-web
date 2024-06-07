@@ -1,20 +1,20 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="gestor_articulos_web.MasterPage" %>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Catalogo Web</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
 <body>
     <form id="form1" runat="server">
-       <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="Default.aspx">Catalogo Web</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,38 +23,45 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="Default.aspx">
+                                <i class="bi bi-house-door"></i> Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="ListaProductos.aspx">Lista Productos</a>
+                            <a class="nav-link" href="ListaProductos.aspx">
+                                <i class="bi bi-list-task"></i> Lista Productos
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Favoritos</a>
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-bag-heart"></i> Favoritos
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
+                            <a class="nav-link" href="MiPerfil.aspx">
+                                <i class="bi bi-person"></i> Mi Perfil
+                            </a>
                         </li>
                     </ul>
-                    <div class="d-flex">
+                    <div class="d-flex align-items-center">
                         <% if(!datos.SeguridadDatos.SesionActiva(Session["usuario"])){ %>
                             <a class="btn btn-success me-2" href="Login.aspx">Login</a>
-                            <a class="btn btn-outline-primary" href="Registrarse.aspx">Registrarse</a>
-                        <%
-                            }
-                            else{
-                        %>
-                            <asp:Button Text="Salir" ID="btnSalir" cssclass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" runat="server" />                                           
-                        <%} %>
-                        <asp:Image ID="imgAvatar" style="height:40px; width:40px; border-radius:50%;" 
-                        runat="server" />
+                            <a class="btn btn-primary me-3" href="Registrarse.aspx">Registrarse</a>
+                        <% } else { %>
+                            <asp:Button Text="Salir" ID="btnSalir" cssclass="btn btn-primary btn-danger-on-hover me-3" OnClick="btnSalir_Click" runat="server" />                                           
+                        <% } %>
+                        <asp:Image ID="imgAvatar" style="height:40px; width:40px; border-radius:50%;" class="ms-2" runat="server" />
                     </div>
                 </div>
             </div>
-  </nav>
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
-</form>
+        </nav>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6W4WGLTpo6VDOJ8G4E7Txyt5wjfbi2RHqd1zWlQbsJywZs4Ib4Q" crossorigin="anonymous"></script>
 </body>
 </html>
+
