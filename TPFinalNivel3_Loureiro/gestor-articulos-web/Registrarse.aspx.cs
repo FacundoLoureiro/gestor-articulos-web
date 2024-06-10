@@ -29,10 +29,10 @@ namespace gestor_articulos_web
                 Response.Redirect("ListaProductos.aspx", false);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Session.Add("Error.aspx", "Error");
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.apsx", false);
             }
         }
     }

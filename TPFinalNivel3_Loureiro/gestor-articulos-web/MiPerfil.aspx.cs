@@ -29,10 +29,9 @@ namespace gestor_articulos_web
             }
             catch (Exception ex)
             {
-
-              Session.Add("Error", ex.ToString());
-            }
-            
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.apsx", false);
+            }           
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -60,6 +59,7 @@ namespace gestor_articulos_web
             catch ( Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.apsx", false);
             }
         }
     }

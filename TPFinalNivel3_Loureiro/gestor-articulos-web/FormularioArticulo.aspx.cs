@@ -56,9 +56,8 @@ namespace gestor_articulos_web
             }
             catch (Exception ex)
             {
-
-                Session.Add("error", ex);
-                throw;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.apsx", false);               
             }
         }
 
@@ -88,14 +87,12 @@ namespace gestor_articulos_web
                     datos.agregarconSP(nuevo);
 
                 Response.Redirect("ListaProductos.aspx", false);
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.apsx", false);         
             }
-
         }
 
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
@@ -122,6 +119,7 @@ namespace gestor_articulos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.apsx", false);
             }
         }
     }
