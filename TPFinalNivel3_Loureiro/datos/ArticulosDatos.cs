@@ -173,40 +173,45 @@ namespace datos
             }
 
         }
+        
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria, A.ImagenUrl, A.Precio FROM ARTICULOS A, CATEGORIAS C, MARCAS M WHERE A.IdMarca = M.Id AND A.IdCategoria = C.Id AND ";
-                if (campo == " A.Precio")
+                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria, A.ImagenUrl, A.Precio FROM ARTICULOS A, CATEGORIAS C, MARCAS M WHERE A.IdMarca = M.Id AND A.IdCategoria = C.Id AND ";       
+                if (campo == "Precio")
                 {
                     switch (criterio)
                     {
                         case "Mayor a":
-                            consulta += " A.Precio>" + filtro;
+                            consulta += "A.Precio > @filtro";
                             break;
                         case "Menor a":
-                            consulta += " A.Precio<" + filtro;
+                            consulta += "A.Precio < @filtro";
                             break;
                         default:
-                            consulta += " A.Precio=" + filtro;
+                            consulta += "A.Precio = @filtro";
                             break;
                     }
+                    datos.setearParametro("@filtro", decimal.Parse(filtro));
                 }
                 else if (campo == "Nombre")
                 {
                     switch (criterio)
                     {
                         case "Comienza con":
-                            consulta += "Nombre like '" + filtro + "%' ";
+                            consulta += "Nombre LIKE @filtro";
+                            datos.setearParametro("@filtro", filtro + "%");
                             break;
                         case "Termina con":
-                            consulta += "Nombre like '%" + filtro + "'";
+                            consulta += "Nombre LIKE @filtro";
+                            datos.setearParametro("@filtro", "%" + filtro);
                             break;
                         default:
-                            consulta += "Nombre like '%" + filtro + "%' ";
+                            consulta += "Nombre LIKE @filtro";
+                            datos.setearParametro("@filtro", "%" + filtro + "%");
                             break;
                     }
                 }
@@ -215,16 +220,20 @@ namespace datos
                     switch (criterio)
                     {
                         case "Comienza con":
-                            consulta += "A.Descripcion like '" + filtro + "%' ";
+                            consulta += "A.Descripcion LIKE @filtro";
+                            datos.setearParametro("@filtro", filtro + "%");
                             break;
                         case "Termina con":
-                            consulta += "A.Descripcion like '%" + filtro + "'";
+                            consulta += "A.Descripcion LIKE @filtro";
+                            datos.setearParametro("@filtro", "%" + filtro);
                             break;
                         default:
-                            consulta += "A.Descripcion like '%" + filtro + "%' ";
+                            consulta += "A.Descripcion LIKE @filtro";
+                            datos.setearParametro("@filtro", "%" + filtro + "%");
                             break;
                     }
                 }
+
                 datos.setearConsulta(consulta);
                 datos.ejecutarConsulta();
                 while (datos.Lector.Read())
@@ -247,17 +256,14 @@ namespace datos
                     aux.Precio = (decimal)datos.Lector["Precio"];
 
                     lista.Add(aux);
-
                 }
                 return lista;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
-
-
 
     }
 

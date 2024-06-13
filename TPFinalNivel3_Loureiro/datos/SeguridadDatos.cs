@@ -11,16 +11,15 @@ namespace datos
     {
         public static bool SesionActiva (object user)
         {
-            Usuario usuario = user != null ? (Usuario)user : null;
-            if (usuario != null && usuario.Id != 0)
+            if (user is Usuario usuario && usuario.Id != 0)
+            {
                 return true;
-            else           
-                return false;            
+            }
+            return false;
         }
         public static bool esAdmin(object user)
         {
-            Usuario usuario = user != null ? (Usuario)user : null;
-            return usuario != null ? usuario.Admin : false;
+            return user is Usuario usuario && usuario.Admin;
         }
     }
 }

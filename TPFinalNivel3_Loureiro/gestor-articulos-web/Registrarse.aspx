@@ -35,8 +35,8 @@
         <h2 class="text-center mb-4">Registrarse</h2>
         <div class="mb-3">
             <label for="txtEmailRegistro" class="form-label">Email</label>
-            <asp:TextBox ID="txtEmaiRegistro" runat="server" CssClass="form-control" placeholder="nombre@ejemplo.com" TextMode="Email" ClientIDMode="Static"></asp:TextBox>
-            <asp:RegularExpressionValidator ErrorMessage="Formato email por favor" ControlToValidate="txtEmail" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" runat="server" />
+            <asp:TextBox ID="txtEmailRegistro" runat="server" CssClass="form-control" placeholder="nombre@ejemplo.com" TextMode="Email" ClientIDMode="Static"></asp:TextBox>
+            <asp:RegularExpressionValidator ErrorMessage="Formato email por favor" ControlToValidate="txtEmailRegistro" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" runat="server" />
         </div>
         <div class="mb-3">
             <label for="txtPasswordRegistro" class="form-label">Password</label>

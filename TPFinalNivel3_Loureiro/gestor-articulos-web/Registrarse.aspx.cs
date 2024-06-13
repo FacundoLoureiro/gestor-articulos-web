@@ -22,7 +22,7 @@ namespace gestor_articulos_web
             {
                 Usuario registro = new Usuario();
                 UsuarioDatos registroDatos = new UsuarioDatos();
-                registro.Email = txtEmaiRegistro.Text;
+                registro.Email = txtEmailRegistro.Text;
                 registro.Pass = txtPassRegistro.Text;
                 int id = registroDatos.NuevoRegistro(registro);
 
@@ -32,7 +32,7 @@ namespace gestor_articulos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.apsx", false);
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

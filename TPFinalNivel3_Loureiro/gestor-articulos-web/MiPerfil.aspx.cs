@@ -13,53 +13,67 @@ namespace gestor_articulos_web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             try
             {
-              if (!IsPostBack)
+                if (!IsPostBack)
                 {
-                  Usuario usuario = (Usuario)Session["usuario"];
-                  txtEmail.Text = usuario.Email;
-                  txtEmail.ReadOnly = true;
-                  txtNombre.Text = usuario.Nombre;
-                  txtApellido.Text = usuario.Apellido;
-                  if (usuario != null && !string.IsNullOrEmpty(usuario.UrlImagen))
-                    imgNuevoPerfil.ImageUrl = "~/Images/" + usuario.UrlImagen;
+                    if (SeguridadDatos.SesionActiva(Session["usuario"]))
+                    {
+                        Usuario usuarioActual = (Usuario)Session["usuario"];
+                        txtEmail.Text = usuarioActual.Email;
+                        txtEmail.ReadOnly = true;
+                        txtNombre.Text = usuarioActual.Nombre;
+                        txtApellido.Text = usuarioActual.Apellido;
+                        if (!string.IsNullOrEmpty(usuarioActual.UrlImagen))
+                        {
+                            imgNuevoPerfil.ImageUrl = "~/Images/" + usuarioActual.UrlImagen;
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("Login.aspx",false);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.apsx", false);
-            }           
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                UsuarioDatos datos = new UsuarioDatos();               
-                Usuario usuario = (Usuario)Session["usuario"];
-                if (txtImagen.PostedFile.FileName != "") 
-                { 
-                    string ruta = Server.MapPath("./Images/");
-                    txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Id + ".jpg");
-                    usuario.UrlImagen = "perfil-" + usuario.Id + ".jpg";
+                if (Session["usuario"] != null)
+                {
+                    UsuarioDatos datos = new UsuarioDatos();
+                    Usuario usuarioActual = (Usuario)Session["usuario"];
+                    if (txtImagen.PostedFile.FileName != "")
+                    {
+                        string ruta = Server.MapPath("./Images/");
+                        txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuarioActual.Id + ".jpg");
+                        usuarioActual.UrlImagen = "perfil-" + usuarioActual.Id + ".jpg";
+                    }
+
+                    usuarioActual.Nombre = txtNombre.Text;
+                    usuarioActual.Apellido = txtApellido.Text;
+
+                    datos.ActualizarUsuario(usuarioActual);
+                    imgNuevoPerfil.ImageUrl = "~/Images/" + usuarioActual.UrlImagen;
+                    Image img = (Image)Master.FindControl("imgAvatar");
+                    img.ImageUrl = "~/Images/" + usuarioActual.UrlImagen;
                 }
-
-                usuario.Nombre = txtNombre.Text;
-                usuario.Apellido = txtApellido.Text;
-                
-
-                datos.ActualizarUsuario(usuario);
-                imgNuevoPerfil.ImageUrl = "~/Images/" + usuario.UrlImagen;
-                Image img = (Image)Master.FindControl("imgAvatar");
-                img.ImageUrl = "~/Images/" + usuario.UrlImagen;
+                else
+                {
+                    Response.Redirect("Login.aspx", false);
+                }
             }
-            catch ( Exception ex)
+            catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.apsx", false);
+                Response.Redirect("Error.aspx", false);
             }
         }
     }
