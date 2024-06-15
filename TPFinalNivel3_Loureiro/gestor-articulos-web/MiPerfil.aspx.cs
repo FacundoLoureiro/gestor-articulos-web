@@ -17,7 +17,7 @@ namespace gestor_articulos_web
             {
                 if (!IsPostBack)
                 {
-                    if (SeguridadDatos.SesionActiva(Session["usuario"]))
+                    if (Session["usuario"] != null)
                     {
                         Usuario usuarioActual = (Usuario)Session["usuario"];
                         txtEmail.Text = usuarioActual.Email;
@@ -46,8 +46,11 @@ namespace gestor_articulos_web
         {
             try
             {
-                if (Session["usuario"] != null)
-                {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
+                
                     UsuarioDatos datos = new UsuarioDatos();
                     Usuario usuarioActual = (Usuario)Session["usuario"];
                     if (txtImagen.PostedFile.FileName != "")
@@ -64,11 +67,7 @@ namespace gestor_articulos_web
                     imgNuevoPerfil.ImageUrl = "~/Images/" + usuarioActual.UrlImagen;
                     Image img = (Image)Master.FindControl("imgAvatar");
                     img.ImageUrl = "~/Images/" + usuarioActual.UrlImagen;
-                }
-                else
-                {
-                    Response.Redirect("Login.aspx", false);
-                }
+                
             }
             catch (Exception ex)
             {
