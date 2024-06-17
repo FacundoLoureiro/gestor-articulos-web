@@ -21,7 +21,7 @@ namespace gestor_articulos_web
                 repRepetidor.DataSource = ListaArticulos;
                 repRepetidor.DataBind();
             }
-
+            
         }
 
         protected void btnEjemplo_Click(object sender, EventArgs e)
