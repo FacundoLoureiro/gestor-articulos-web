@@ -39,9 +39,7 @@
                         <h5 class="card-title"><%#Eval("Nombre") %></h5>
                         <p class="card-text"><%#Eval("Descripcion") %></p>                 
                         <asp:Button Text="Ver Detalle" CssClass="btn btn-primary" ID="btnVerDetalle" CommandArgument='<%#Eval("Id") %>' CommandName="articuloId" runat="server" OnClick="btnVerDetalle_Click" />
-                        <a href="Favoritos.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">
-                            🤍
-                        </a>
+                        <asp:Button Text="🤍" CssClass="btn btn-primary" ID="btnAgregarFavorito" CommandArgument='<%#Eval("Id") %>' CommandName="agregarFavorito" runat="server" OnClick="btnAgregarFavorito_Click" />
                     </div>
                 </div>
             </div>

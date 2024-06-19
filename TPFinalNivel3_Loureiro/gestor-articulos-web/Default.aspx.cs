@@ -28,5 +28,36 @@ namespace gestor_articulos_web
         {
             string valor = ((Button)sender).CommandArgument;
         }
+
+        protected void btnAgregarFavorito_Click(object sender, EventArgs e)
+        {
+            Usuario usuario = Session["usuario"] as Usuario;
+
+            if (usuario != null)
+            {
+                try
+                {          
+                    Button btn = (Button)sender;
+                    int idArticulo = int.Parse(btn.CommandArgument);
+                    Favorito favorito = new Favorito
+                    {
+                        IdUser = usuario.Id,
+                        IdArticulo = idArticulo
+                    };
+                   
+                    FavoritosDatos datos = new FavoritosDatos();
+                    datos.altaFavSP(favorito);                   
+                    Response.Redirect("Favoritos.aspx", false);
+                }
+                catch (Exception ex)
+                {                   
+                    throw ex;
+                }
+            }
+            else
+            {               
+                Response.Redirect("Login.aspx", false);
+            }
+        }
     }
 }
