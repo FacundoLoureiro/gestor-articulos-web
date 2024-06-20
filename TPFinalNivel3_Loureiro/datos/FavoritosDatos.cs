@@ -53,7 +53,6 @@ namespace datos
             try
             {
                 datos.setearProcedimiento("storedAltaFavoritos");
-                datos.setearParametro("@Id", favorito.Id);
                 datos.setearParametro("@IdUser", favorito.IdUser);
                 datos.setearParametro("@IdArticulo", favorito.IdArticulo);
                 datos.ejecutarAccion();

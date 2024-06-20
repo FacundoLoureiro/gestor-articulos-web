@@ -3,30 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Productos</h1>
-      <head>
-    <style>
-        .card-img-top {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #f0f0f0;
-            display: block;
-        }
-
-        .card {
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-    </style>
+ <head>
 </head>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">         
