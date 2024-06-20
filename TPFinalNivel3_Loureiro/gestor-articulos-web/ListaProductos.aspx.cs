@@ -35,6 +35,7 @@ namespace gestor_articulos_web
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvArticulos.PageIndex = e.NewPageIndex;
+            dgvArticulos.DataSource = Session["ListaProductos"];
             dgvArticulos.DataBind();
 
         }

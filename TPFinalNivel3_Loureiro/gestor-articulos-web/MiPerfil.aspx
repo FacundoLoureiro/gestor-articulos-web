@@ -20,7 +20,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <h2>Mi Perfil</h2>
      <div class="container mt-5 d-flex justify-content-center">
-    <div class="card p-4 shadow-lg" style="width: 100%; max-width: 600px;">
+     <div class="card p-4 shadow-lg" style="width: 100%; max-width: 600px;">
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
