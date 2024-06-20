@@ -57,7 +57,7 @@ namespace gestor_articulos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.apsx", false);               
+                Response.Redirect("Error.aspx", false);               
             }
         }
 
@@ -91,7 +91,7 @@ namespace gestor_articulos_web
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.apsx", false);         
+                Response.Redirect("Error.aspx", false);         
             }
         }
 
@@ -113,13 +113,13 @@ namespace gestor_articulos_web
                 {
                     ArticulosDatos datos = new ArticulosDatos();
                     datos.borrar(int.Parse(txtId.Text));
-                    Response.Redirect("ListaProductos.aspx");
+                    Response.Redirect("ListaProductos.aspx", false);
                 }
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
-                Response.Redirect("Error.apsx", false);
+                Response.Redirect("Error.aspx", false);
             }
         }
     }
