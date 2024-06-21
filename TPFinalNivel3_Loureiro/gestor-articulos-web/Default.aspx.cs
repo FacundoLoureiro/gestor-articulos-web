@@ -50,8 +50,9 @@ namespace gestor_articulos_web
                     Response.Redirect("Favoritos.aspx", false);
                 }
                 catch (Exception ex)
-                {                   
-                    throw ex;
+                {
+                    Session.Add("error", ex.ToString());
+                    Response.Redirect("Error.aspx", false);
                 }
             }
             else
