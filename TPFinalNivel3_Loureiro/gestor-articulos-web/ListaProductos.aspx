@@ -63,7 +63,7 @@
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" />
-            <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="!!" />           
+            <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="✏️" />           
         </Columns>
     </asp:GridView>
     <a href="FormularioArticulo.aspx" class="btn btn-primary">Agregar</a>    
