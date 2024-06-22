@@ -11,9 +11,11 @@ namespace gestor_articulos_web
 {
     public partial class Default : System.Web.UI.Page
     {
+        public bool VerDetalle { get; set; }
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            VerDetalle = false;
             ArticulosDatos datos = new ArticulosDatos();
             ListaArticulos = datos.listarconSP();
             if (!IsPostBack)
@@ -26,6 +28,7 @@ namespace gestor_articulos_web
 
         protected void btnVerDetalle_Click(object sender, EventArgs e)
         {
+            VerDetalle = true;
             string valor = ((Button)sender).CommandArgument;
         }
 

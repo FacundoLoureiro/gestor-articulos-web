@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <h1>Productos</h1>
  <head>
 </head>
@@ -15,10 +16,16 @@
                     <div class="card-body">
                         <h5 class="card-title"><%#Eval("Nombre") %></h5>
                         <p class="card-text"><%#Eval("Descripcion") %></p>
-                        <p class="card-text"><%#Eval("Marca") %></p>
-                        <p class="card-text"><%#Eval("Categoria") %></p>
-                        <p class="card-text"><%#Eval("Precio") %></p>
-                        <asp:Button Text="Ver Detalle" CssClass="btn btn-dark" ID="btnVerDetalle" CommandArgument='<%#Eval("Id") %>' CommandName="articuloId" runat="server" OnClick="btnVerDetalle_Click" />
+                        <asp:UpdatePanel ID="UpdatePanelDetalle" runat="server" class="mb-3">
+                        <ContentTemplate>
+                            <% if (VerDetalle) { %>
+                            <asp:Button Text="Ver Detalle" CssClass="btn btn-dark" ID="Button1" CommandArgument='<%#Eval("Id") %>' CommandName="articuloId" runat="server" OnClick="btnVerDetalle_Click" />
+                            <p class="card-text"><%#Eval("Marca") %></p>
+                            <p class="card-text"><%#Eval("Categoria") %></p>
+                            <p class="card-text"><%#Eval("Precio") %></p>
+                            <% } %>
+                         </ContentTemplate>
+                        </asp:UpdatePanel>
                         <asp:Button Text="🤍" CssClass="btn btn-dark" ID="btnAgregarFavorito" CommandArgument='<%#Eval("Id") %>' CommandName="agregarFavorito" runat="server" OnClick="btnAgregarFavorito_Click" />
                     </div>
                 </div>
