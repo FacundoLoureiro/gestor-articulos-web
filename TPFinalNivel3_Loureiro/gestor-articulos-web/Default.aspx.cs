@@ -11,13 +11,11 @@ namespace gestor_articulos_web
 {
     public partial class Default : System.Web.UI.Page
     {
-        public bool VerDetalle { get; set; }
-        public int ProductoDetalleId { get; set; }
+        
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            VerDetalle = false;
-            ProductoDetalleId = 0;
+         
             ArticulosDatos datos = new ArticulosDatos();
             ListaArticulos = datos.listarconSP();
             if (!IsPostBack)
@@ -30,10 +28,8 @@ namespace gestor_articulos_web
 
         protected void btnVerDetalle_Click(object sender, EventArgs e)
         {
-            VerDetalle = true;
-            ProductoDetalleId = int.Parse(((Button)sender).CommandArgument);
-            repRepetidor.DataSource = ListaArticulos;
-            repRepetidor.DataBind();
+            int articuloId = int.Parse(((Button)sender).CommandArgument);
+            Response.Redirect("VerDetalle.aspx?id=" + articuloId);
         }
 
         protected void btnAgregarFavorito_Click(object sender, EventArgs e)
