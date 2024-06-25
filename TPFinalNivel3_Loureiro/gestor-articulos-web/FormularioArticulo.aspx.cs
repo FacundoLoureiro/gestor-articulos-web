@@ -46,6 +46,7 @@ namespace gestor_articulos_web
                     txtCodigo.Text = seleccionado.Codigo.ToString();
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;
+                    txtPrecio.Text = seleccionado.Precio.ToString();
                     txtImagenUrl.Text = seleccionado.ImagenUrl;
                     
                     ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
@@ -71,7 +72,9 @@ namespace gestor_articulos_web
                 nuevo.Codigo = txtCodigo.Text;
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Precio = int.Parse(txtPrecio.Text);
                 nuevo.ImagenUrl = txtImagenUrl.Text;
+                
 
                 nuevo.Marca = new Marcas();
                 nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);

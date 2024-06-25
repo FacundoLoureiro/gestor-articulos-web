@@ -13,9 +13,10 @@ namespace gestor_articulos_web
     {
         
         public List<Articulo> ListaArticulos { get; set; }
+        public bool FiltroAvanzadoHome { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-         
+            FiltroAvanzadoHome = chkAvanzadoHome.Checked;
             ArticulosDatos datos = new ArticulosDatos();
             ListaArticulos = datos.listarconSP();
             if (!IsPostBack)
@@ -61,6 +62,55 @@ namespace gestor_articulos_web
             else
             {               
                 Response.Redirect("Login.aspx", false);
+            }
+        }
+
+        protected void txtFiltroHome_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["ListaProductos"];
+            List<Articulo> listaFiltro = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltroHome.Text.ToUpper()));
+            repRepetidor.DataSource = ListaArticulos;
+            repRepetidor.DataBind();
+        }
+
+        protected void chkAvanzadoHome_CheckedChanged(object sender, EventArgs e)
+        {
+            FiltroAvanzadoHome = chkAvanzadoHome.Checked;
+            txtFiltroHome.Enabled = !FiltroAvanzadoHome;
+        }
+
+        protected void btnBuscarHome_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArticulosDatos datos = new ArticulosDatos();
+                repRepetidor.DataSource = datos.filtrar(
+                    ddlCampoHome.SelectedItem.ToString(),
+                    ddlCriterio.SelectedItem.ToString(),
+                    txtFiltroAvanzado.Text);
+                repRepetidor.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void ddlCampoHome_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlCriterio.Items.Clear();
+            if (ddlCampoHome.SelectedItem.Value == "Precio")
+            {
+                ddlCriterio.Items.Add("Igual a");
+                ddlCriterio.Items.Add("Mayor a");
+                ddlCriterio.Items.Add("Menor a");
+            }
+            else
+            {
+                ddlCriterio.Items.Add("Contiene");
+                ddlCriterio.Items.Add("Comienza con");
+                ddlCriterio.Items.Add("Termina con");
             }
         }
     }
