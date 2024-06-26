@@ -16,6 +16,7 @@ namespace gestor_articulos_web
         public bool FiltroAvanzadoHome { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             FiltroAvanzadoHome = chkAvanzadoHome.Checked;
             ArticulosDatos datos = new ArticulosDatos();
             ListaArticulos = datos.listarconSP();

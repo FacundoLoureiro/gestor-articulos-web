@@ -14,7 +14,7 @@ namespace gestor_articulos_web
         protected void Page_Load(object sender, EventArgs e)
         {
             imgAvatar.ImageUrl = "https://simg.nicepng.com/png/small/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png";
-            if (!(Page is Login || Page is Registro || Page is Error || Page is ListaProductos ))
+            if (!( Page is Login || Page is Registro || Page is Error || Page is ListaProductos  ))
             {
                 if (SeguridadDatos.SesionActiva(Session["usuario"]))
                 {
@@ -26,6 +26,10 @@ namespace gestor_articulos_web
                 }
                 else
                 {
+                    if (Page is Default)
+                    {
+                        return;
+                    }
                     Response.Redirect("Login.aspx", false);
                 }
             }               

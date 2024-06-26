@@ -14,10 +14,17 @@ namespace gestor_articulos_web
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!SeguridadDatos.esAdmin(Session["usuario"]))
+            if (!SeguridadDatos.SesionActiva(Session["usuario"]))
             {
-                Session.Add("error", "Se requiere permisos de admin para acceder a esta pantalla");
-                Response.Redirect("Error.aspx", false);
+                Response.Redirect("Login.aspx", false);
+            }
+            else
+            {                
+                if (!SeguridadDatos.esAdmin(Session["usuario"]))
+                {
+                    Session.Add("error", "Se requiere permisos de admin para acceder a esta pantalla");
+                    Response.Redirect("Error.aspx", false);
+                }
             }
 
 
