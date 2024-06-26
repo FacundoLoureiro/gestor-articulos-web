@@ -72,6 +72,8 @@
     <Content Include="Favoritos.aspx" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icon\favicon.ico" />
+    <Content Include="Icon\logo.png" />
     <Content Include="ListaProductos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MiPerfil.aspx" />

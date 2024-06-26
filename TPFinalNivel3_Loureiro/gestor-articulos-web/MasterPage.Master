@@ -5,7 +5,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Catalogo Web</title>
-    <link rel="shortcut icon" href="~/Images/favicon.ico/">
+    <link rel="shortcut icon" href="~/Icon/favicon.ico" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <!-- CSS only -->
@@ -17,7 +17,9 @@
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="Default.aspx">Catalogo Web</a>
+                <a class="navbar-brand" href="Default.aspx">
+                <img src="Icon/logo.png" alt="Logo" style="height: 30px; width: auto; margin-right: 10px; vertical-align: -4px;">Catalogo Web
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
