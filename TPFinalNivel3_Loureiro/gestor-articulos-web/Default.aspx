@@ -4,6 +4,18 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Productos</h1>
  <head>
+     <style>
+        .fixed-card-size {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fixed-img-size {
+            height: 200px;
+            object-fit: contain;
+        }
+    </style>
 </head>
         <div class="row">
         <div class="col-6">
@@ -15,8 +27,8 @@
            <div class="col-6" style="display: flex; flex-direction: column; justify-content: flex-end;">
             <div class="mb-3">
                 <asp:CheckBox Text="Filtro Avanzado" 
-                    CssClass="" ID="chkAvanzadoHome" runat="server" 
-                    AutoPostBack="true" OnCheckedChanged="chkAvanzadoHome_CheckedChanged"
+                    CssClass="" ID="chkAvanzadoHome" runat="server" AutoPostBack="true" 
+                    OnCheckedChanged="chkAvanzadoHome_CheckedChanged"
                     />
             </div>
         </div>
@@ -61,8 +73,8 @@
         <asp:Repeater runat="server" ID="repRepetidor">
             <ItemTemplate>
                  <div class="col">
-                 <div class="card">
-                    <img src="<%#Eval("ImagenUrl") %>" class="card-img-top" alt="...">
+                 <div class="card fixed-card-size">
+                    <img src="<%#Eval("ImagenUrl") %>" class="card-img-top fixed-img-size" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><%#Eval("Nombre") %></h5>
                         <p class="card-text"><%#Eval("Descripcion") %></p>
