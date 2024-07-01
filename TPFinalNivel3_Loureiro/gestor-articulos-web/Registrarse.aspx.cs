@@ -20,13 +20,15 @@ namespace gestor_articulos_web
         {
             try
             {
-                Usuario registro = new Usuario();
-                UsuarioDatos registroDatos = new UsuarioDatos();
-                registro.Email = txtEmailRegistro.Text;
-                registro.Pass = txtPassRegistro.Text;
-                int id = registroDatos.NuevoRegistro(registro);
+                Usuario usuario = new Usuario
+                {
+                    Email = txtEmailRegistro.Text,
+                    Pass = txtPassRegistro.Text
+                };
+                UsuarioDatos usuarioDatos = new UsuarioDatos();
+                int id = usuarioDatos.NuevoRegistro(usuario);
 
-                Response.Redirect("ListaProductos.aspx", false);
+                Response.Redirect("MiPerfil.aspx", false);
 
             }
             catch (Exception ex)

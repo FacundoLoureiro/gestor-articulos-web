@@ -20,7 +20,7 @@ namespace datos
             
             try
             {
-                conexion.ConnectionString = "server=DESKTOP-3NONF6A\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security= true";
+                conexion.ConnectionString = "workstation id=WEBCATALOGO.mssql.somee.com;packet size=4096;user id=facundo_SQLLogin_5;pwd=q4l56s3nso;data source=WEBCATALOGO.mssql.somee.com;persist security info=False;initial catalog=WEBCATALOGO;TrustServerCertificate=True";
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria, A.ImagenUrl, A.Precio FROM ARTICULOS A, CATEGORIAS C, MARCAS M WHERE A.IdMarca = M.Id AND A.IdCategoria = C.Id";
                 if (id != "")
